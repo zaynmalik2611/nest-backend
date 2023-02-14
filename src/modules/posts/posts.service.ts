@@ -6,9 +6,9 @@ import { PostsRepository } from './posts.repository';
 export class PostsService {
   constructor(private repository: PostsRepository) {}
 
-  async createTweet(params: {
-    content: Post[`content`];
-    userId: User[`id`];
+  async createPost(params: {
+    content: Post['content'];
+    userId: User['id'];
   }): Promise<Post> {
     const { content, userId } = params;
 
