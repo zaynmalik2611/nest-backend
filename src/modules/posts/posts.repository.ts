@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Post, Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 
-type GetPostsQueryType = {
+export type GetPostsQueryType = {
   skip?: number;
   take?: number;
   cursor?: Prisma.PostWhereUniqueInput;
