@@ -8,6 +8,7 @@ export type GetPostsQueryType = {
   cursor?: Prisma.PostWhereUniqueInput;
   where?: Prisma.PostWhereInput;
   orderBy?: Prisma.PostOrderByWithRelationInput;
+  include?: Prisma.PostInclude;
 };
 @Injectable()
 export class PostsRepository {
@@ -19,13 +20,14 @@ export class PostsRepository {
   }
 
   async getPosts(params: GetPostsQueryType): Promise<Post[]> {
-    const { skip, take, cursor, where, orderBy } = params;
+    const { skip, take, cursor, where, orderBy, include } = params;
     return this.prisma.post.findMany({
       skip,
       take,
       cursor,
       where,
       orderBy,
+      include,
     });
   }
 

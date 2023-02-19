@@ -7,13 +7,15 @@ export class PostsService {
   constructor(private repository: PostsRepository) {}
 
   async createPost(params: {
+    title: Post['title'];
     content: Post['content'];
     userId: User['id'];
   }): Promise<Post> {
-    const { content, userId } = params;
+    const { title, content, userId } = params;
 
     const post = await this.repository.createPost({
       data: {
+        title,
         content,
         user: {
           connect: {
@@ -26,8 +28,9 @@ export class PostsService {
     return post;
   }
 
-  async getPosts(): Promise<Post[]> {
-    const posts = await this.repository.getPosts({});
+  async getPosts(params: { skip?: number; take?: number }): Promise<Post[]> {
+    const { skip, take } = params;
+    const posts = await this.repository.getPosts({ skip, take });
     return posts;
   }
 }
